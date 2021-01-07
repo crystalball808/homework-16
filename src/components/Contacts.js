@@ -32,14 +32,21 @@ const contacts = [{
     gender: "male"
 }];
 
-class Contacts extends React.Component {
+class Contacts extends Component {
+    constructor(props){
+        super(props);
+        this.maleCheck = React.createRef();
+        this.femaleCheck = React.createRef();
+        this.neitherCheck = React.createRef();
+    }
 
     state = {
        contacts: contacts,
     }
 
     updateSearch = (e) =>{
-        const filteredContacts = contacts.filter(contact=>(contact.firstName + ' ' + contact.lastName).toLowerCase().indexOf(e.target.value.toLowerCase())>=0 || contact.phone.toLowerCase().indexOf(e.target.value)>=0);
+        const genderContacts = contacts.filter(contact=>(this.maleCheck.current.checked === true && contact.gender === 'male')||(this.femaleCheck.current.checked === true && contact.gender === 'female')||(this.neitherCheck.current.checked === true && typeof contact.gender === "undefined"));
+        const filteredContacts = genderContacts.filter(contact=>(contact.firstName + ' ' + contact.lastName).toLowerCase().indexOf(e.target.value.toLowerCase())>=0 || contact.phone.toLowerCase().indexOf(e.target.value)>=0);
         console.log(filteredContacts);
         this.setState({contacts:filteredContacts});
     }
@@ -50,7 +57,15 @@ class Contacts extends React.Component {
                 <div>
                     <input type="text" onChange={this.updateSearch}></input>
                 </div>
-                {this.state.contacts.map((c)=><Contact firstName={c.firstName} lastName={c.lastName} number={c.phone} gender={c.gender} />)}
+                <div>
+                    <input type="checkbox" ref={this.maleCheck} id="male" defaultChecked/>
+                    <label htmlFor="male">Ч</label>
+                    <input type="checkbox" ref={this.femaleCheck} id="female" defaultChecked/>
+                    <label htmlFor="female">Ж</label>
+                    <input type="checkbox" ref={this.neitherCheck} id="neither" defaultChecked/>
+                    <label htmlFor="neither">Не визначено</label>
+                </div>
+                {this.state.contacts.map((c,i)=><Contact firstName={c.firstName} lastName={c.lastName} number={c.phone} gender={c.gender} key={i} />)}
             </div>
         )
     }
