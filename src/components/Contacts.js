@@ -38,6 +38,7 @@ class Contacts extends Component {
         this.maleCheck = React.createRef();
         this.femaleCheck = React.createRef();
         this.neitherCheck = React.createRef();
+        this.search = React.createRef();
     }
 
     state = {
@@ -46,16 +47,16 @@ class Contacts extends Component {
 
     updateSearch = (e) =>{
         const genderContacts = contacts.filter(contact=>(this.maleCheck.current.checked === true && contact.gender === 'male')||(this.femaleCheck.current.checked === true && contact.gender === 'female')||(this.neitherCheck.current.checked === true && typeof contact.gender === "undefined"));
-        const filteredContacts = genderContacts.filter(contact=>(contact.firstName + ' ' + contact.lastName).toLowerCase().indexOf(e.target.value.toLowerCase())>=0 || contact.phone.toLowerCase().indexOf(e.target.value)>=0);
+        const filteredContacts = genderContacts.filter(contact=>(contact.firstName + ' ' + contact.lastName).toLowerCase().indexOf(this.search.current.value.toLowerCase())>=0 || contact.phone.toLowerCase().indexOf(this.search.current.value)>=0);
         console.log(filteredContacts);
         this.setState({contacts:filteredContacts});
     }
 
     render(){
         return(
-            <div>
+            <div className="wrapper" onChange={this.updateSearch}>
                 <div>
-                    <input type="text" onChange={this.updateSearch}></input>
+                    <input className="search-bar" type="text" ref={this.search} ></input>
                 </div>
                 <div>
                     <input type="checkbox" ref={this.maleCheck} id="male" defaultChecked/>

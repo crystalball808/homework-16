@@ -14,14 +14,22 @@ code {
     monospace;
 }
 
+.wrapper {
+  text-align: center;
+  
+}
+
 .contact {
-  background-color: rgb(199, 222, 224);
+  background-color: rgb(255, 255, 255);
   border-radius: 15px;
-  border: 2px solid rgb(111, 147, 195);
-  margin: 1px;
+  border: 1px solid rgb(122,122,122,0.5);
+  margin: auto;
   display: table;
   width: 300px;
+  box-shadow: 0.2em 0.2em 2px rgb(122,122,122,0.5);
 }
+
+
 
 .gender{
   width: 20%;
@@ -30,5 +38,13 @@ code {
 }
 
 .contact-info{
-  font-family: 'Rubik', sans-serif;;
+  text-align: left;
+  font-family: 'Rubik', sans-serif;
+  float: left;
+  font-weight: bold;
+}
+
+.number{
+  font-weight: normal;
+  color: rgb(102, 102, 102);
 }

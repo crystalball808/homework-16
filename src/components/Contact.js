@@ -19,7 +19,7 @@ function Contact (props){
             <img className="gender" src= {gender} alt={props.gender} />
             <div className="contact-info">
                 <p>{props.firstName} {props.lastName}</p>
-                <p>{props.number}</p>
+                <p className="number">{props.number}</p>
             </div>
         </div>
     )
